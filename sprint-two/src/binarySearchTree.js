@@ -28,16 +28,15 @@ BinarySearchTree.prototype.insert = function(value) {
 BinarySearchTree.prototype.contains = function(value) {
   if (this.value === value) {
     return true;
-  } else if (!this.left && !this.right) {
-    return false;
-  } else if (this.left && this.right) {
-    return this.left.contains(value) || this.right.contains(value);
-  } else if (this.left) {
-    return this.left.contains(value);
-  } else {
-    return this.right.contains(value);
-  }
+  } 
 
+  if (this.value > value && this.left) {
+    return this.left.contains(value);
+  } else if (this.right) {
+    return this.right.contains(value);
+  } else {
+    return false;
+  }
 };
 
 BinarySearchTree.prototype.depthFirstLog = function(cb) {
@@ -56,4 +55,7 @@ BinarySearchTree.prototype.depthFirstLog = function(cb) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+    insert - O(n)
+    contains - O(log n) is average; worst case is O(n) for an unbalanced tree
+    depthFirstLog - O(n)
  */
