@@ -47,6 +47,14 @@ describe('hashTable', function() {
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
 
+  // New tests
+  it('should keep a count of currently filled buckets', function() {
+    hashTable.insert('Steven', 'Tyler');
+    hashTable.insert('Bob', 'Loblaw');
+    hashTable.remove('Steven');
+    expect(hashTable.getCount()).to.equal(1);
+  });
+
   // (Advanced! Remove the extra "x" when you want the following tests to run)
   xit ('should double in size when needed', function() {
     _.each(people, function(person) {

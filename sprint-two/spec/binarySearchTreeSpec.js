@@ -36,4 +36,9 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
   });
+
+  //New Tests
+  it('should raise a RangeError if inserting the same value as the current Tree node', function() {
+    expect(function() { binarySearchTree.insert(5); } ).to.throw(RangeError);
+  });
 });

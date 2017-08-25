@@ -1,6 +1,7 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this._count = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
@@ -9,6 +10,7 @@ HashTable.prototype.insert = function(k, v) {
 
   if (!bucket) {
     this._storage.set(index, [[k, v]]);
+    this._count++;
   } else {
     var updateKey = false;
 
@@ -21,16 +23,13 @@ HashTable.prototype.insert = function(k, v) {
       }
     });
 
-
     if (updateKey) {
       this._storage.set(index, bucket);
     } else {
       bucket.push([k, v]);
       this._storage.set(index, bucket);
     }
-  }
-
-  
+  }  
 };
 
 HashTable.prototype.retrieve = function(k) {
@@ -58,7 +57,20 @@ HashTable.prototype.remove = function(k) {
         keyVal[1] = undefined;
       }
     });
+
+    var empty = bucket.every(function(keyVal) {
+      return keyVal[1] === undefined;
+    });
+
+    if (empty) {
+      this._storage.set(index, null);
+      this._count--;
+    }
   }
+};
+
+HashTable.prototype.getCount = function() {
+  return this._count;
 };
 
 

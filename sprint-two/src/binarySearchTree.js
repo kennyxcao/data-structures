@@ -9,6 +9,9 @@ var BinarySearchTree = function(value) {
 };
 
 BinarySearchTree.prototype.insert = function(value) {
+  if (this.value === value) {
+    throw new RangeError('Tree value already existed.');
+  }
   //left child
   if (this.value > value) {
     if (!this.left) {
@@ -16,7 +19,7 @@ BinarySearchTree.prototype.insert = function(value) {
     } else {
       this.left.insert(value);
     }
-  } else { //right child
+  } else if (this.value < value) { //right child
     if (!this.right) {
       this.right = BinarySearchTree(value);
     } else {

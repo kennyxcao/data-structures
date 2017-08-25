@@ -31,6 +31,7 @@ describe('linkedList', function() {
     expect(linkedList.head.value).to.equal(5);
   });
 
+
   it('should return the value of the former head when removeHead is called', function() {
     linkedList.addToTail(4);
     expect(linkedList.removeHead()).to.equal(4);
@@ -52,4 +53,16 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  it('should set the head and tail to the same node when the first node is added', function() {
+    linkedList.addToTail(4);
+    expect(linkedList.head.value).to.equal(4);
+    expect(linkedList.tail.value).to.equal(4);
+  });
+
+  it('should reset the head and tail to null when the last node is removed', function() {
+    linkedList.addToTail(4);
+    linkedList.removeHead();
+    expect(linkedList.head).to.equal(null);
+    expect(linkedList.tail).to.equal(null);
+  });
 });
