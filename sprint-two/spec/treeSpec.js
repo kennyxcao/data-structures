@@ -49,4 +49,29 @@ describe('tree', function() {
     expect(tree.children[0].children[0].children[0].value).to.equal(8);
   });
 
+  it('should add parent node to the parent property of child after child tree insertion', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    expect(tree.children[0].parent.value).to.equal(99);
+    expect(tree.children[1].parent.value).to.equal(99);
+  });
+
+  it('should remove parent tree from child node when removeFromParent is called', function() {
+    tree.addChild(5);
+    var child = tree.children[0];
+    tree.children[0].removeFromParent();
+    expect(child.parent).to.equal(null);
+  });
+
+  it('should remove child node from parent\'s array of children when removeFromParent is called', function() {
+    tree.addChild(5);
+    tree.children[0].removeFromParent();
+    expect(tree.contains(5)).to.equal(false);
+  });
+
+  it('should raise a RangeError if inserting the same value as the current Tree node', function() {
+    tree.addChild(5);
+    expect(function() { tree.addChild(5); } ).to.throw(RangeError);
+  });
+
 });
