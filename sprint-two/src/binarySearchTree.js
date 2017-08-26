@@ -55,7 +55,7 @@ BinarySearchTree.prototype.depthFirstLog = function(cb) {
     this.right.depthFirstLog(cb);
   }
   
-  // solution using stack
+  //// solution using stack
   // var stack = [this];
 
   // while (stack.length > 0) {
