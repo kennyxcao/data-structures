@@ -54,6 +54,41 @@ BinarySearchTree.prototype.depthFirstLog = function(cb) {
   if (this.right) {
     this.right.depthFirstLog(cb);
   }
+  
+  // solution using stack
+  // var stack = [this];
+
+  // while (stack.length > 0) {
+  //   var currentNode = stack.pop();
+  //   cb(currentNode.value);
+    
+  //   if (currentNode.right) {
+  //     stack.push(currentNode.right);
+  //   }
+
+  //   if (currentNode.left) {
+  //     stack.push(currentNode.left);
+  //   }    
+  // }
+};
+
+// .breadthFirstLog() - logs the nodes contained in the tree using a breadth-first approach
+BinarySearchTree.prototype.breadthFirstLog = function(cb) {
+  //apply callback to root
+  var queue = [this];
+
+  while (queue.length > 0) {
+    var currentNode = queue.shift();
+     
+    cb(currentNode.value);
+
+    if (currentNode.left) {
+      queue.push(currentNode.left);
+    }
+    if (currentNode.right) {
+      queue.push(currentNode.right);
+    }
+  }
 };
 
 /*

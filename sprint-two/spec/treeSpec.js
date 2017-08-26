@@ -73,5 +73,21 @@ describe('tree', function() {
     tree.addChild(5);
     expect(function() { tree.addChild(5); } ).to.throw(RangeError);
   });
+  
+  it('should apply a callback function to every node when traverse is invoked', function() {
+    var array = [];
+    var callback = function(value) {
+      array.push(value);
+    };
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[0].addChild(9);
+    tree.children[1].addChild(8);
+    tree.children[1].addChild(10);
+    tree.traverse(callback);
+    expect(array).to.eql([99, 5, 7, 9, 6, 8, 10]);
+  });
+
 
 });

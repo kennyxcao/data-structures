@@ -10,7 +10,6 @@ var Tree = function(value) {
   return newTree;
 };
 
-
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
@@ -49,6 +48,16 @@ treeMethods.removeFromParent = function(value) {
     //splice child out of children array
     parent.children.splice(index, 1);
   } 
+};
+
+treeMethods.traverse = function(cb) {
+  cb(this.value);
+  
+  if (this.children.length > 0) {
+    this.children.forEach(function(child) { 
+      child.traverse(cb);
+    });
+  }  
 };
 
 /*
